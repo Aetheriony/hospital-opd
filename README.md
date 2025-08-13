@@ -44,7 +44,7 @@ MONGODB_URI=<your_mongodb_uri>
 NEXT_PUBLIC_API_KEY=<your_api_key>
 ```
 
-5. Start the development server:
+5. Start the development server: 
 
 ```bash
 npm run dev
