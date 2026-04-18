@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     if (req.method === "POST") {
         try {
-            const { jobId, name, email, phone, resumeUrl } = req.body;
+            const { jobId, name, email, phone, experience, resumeUrl } = req.body;
             
             // Check if job exists
             const job = await Job.findById(jobId);
@@ -18,6 +18,7 @@ export default async function handler(req, res) {
                 name,
                 email,
                 phone,
+                experience,
                 resumeUrl
             });
 

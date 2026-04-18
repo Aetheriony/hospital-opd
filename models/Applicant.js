@@ -5,6 +5,7 @@ const ApplicantSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: String, required: true },
+    experience: { type: Number, default: 0 },
     resumeUrl: { type: String }, // Link to cloud storage or file path
     status: { type: String, enum: ["Pending", "Reviewed", "Interviewed", "Rejected", "Hired"], default: "Pending" }
 }, { timestamps: { createdAt: 'applicationDate', updatedAt: 'lastUpdated' } });

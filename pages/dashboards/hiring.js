@@ -13,18 +13,29 @@ export default function HiringDashboard() {
         const fetchHiringData = async () => {
             try {
                 // Fetch basic jobs
-                const res = await axios.get("/api/hiring/jobs");
-                setJobs(res.data);
+                const jobsRes = await axios.get("/api/hiring/jobs");
+                const jobsData = jobsRes.data;
+                setJobs(jobsData);
                 
-                // For demonstration, simulating fetching applicants for each job.
-                // In a true system, we might fetch only when a job is clicked to save bandwidth,
-                // or fetch a bundled response.
+                // Fetch all applicants and group them by jobId
+                const applicantsRes = await axios.get("/api/hiring/apply");
+                const applicantsData = applicantsRes.data;
+                
                 const applicantsMap = {};
-                for (const job of res.data) {
-                    applicantsMap[job._id] = job.applicants || [];
-                }
-                setApplicants(applicantsMap);
+                // Initialize map with empty arrays for each job
+                jobsData.forEach(job => {
+                    applicantsMap[job._id] = [];
+                });
                 
+                // Fill map with actual applicants
+                applicantsData.forEach(applicant => {
+                    const jId = typeof applicant.job === 'object' ? applicant.job._id : applicant.job;
+                    if (applicantsMap[jId]) {
+                        applicantsMap[jId].push(applicant);
+                    }
+                });
+                
+                setApplicants(applicantsMap);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching hiring data:", error);
@@ -146,7 +157,7 @@ export default function HiringDashboard() {
                                                                 <p className="flex items-center"><Phone className="w-3.5 h-3.5 mr-2" /> {applicant.phone}</p>
                                                             </div>
                                                             <div className="mt-4 pt-3 border-t border-gray-100 flex justify-between">
-                                                                <a href={applicant.resumeLink || '#'} target="_blank" rel="noreferrer" className="text-teal-600 hover:text-teal-800 text-sm font-medium flex items-center">
+                                                                <a href={applicant.resumeUrl || '#'} target="_blank" rel="noreferrer" className="text-teal-600 hover:text-teal-800 text-sm font-medium flex items-center">
                                                                     Resume <ExternalLink className="w-3.5 h-3.5 ml-1" />
                                                                 </a>
                                                                 <button className="text-gray-500 hover:text-emerald-600 transition-colors" title="Shortlist">
