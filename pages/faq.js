@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Navbar from '../components/landing/Navbar';
-import Footer from '../components/landing/Footer';
+import Navbar from '@/components/landing/Navbar';
+import Footer from '@/components/Footer';
 import Head from 'next/head';
 
 const FAQPage = () => {
