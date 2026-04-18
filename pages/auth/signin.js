@@ -1,80 +1,125 @@
 import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
-import { Input } from "@/components/ui/input"; // Import Shadcn Input component
-import { Button } from "@/components/ui/button"; // Import Shadcn Button component
-import { Label } from "@/components/ui/label"; //Import Shadcn Label component
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"; //Import Shadcn Card component
+import { User, Lock, ArrowRight } from "lucide-react";
 
 export default function SignIn() {
     const router = useRouter();
     const [form, setForm] = useState({ username: "", password: "" });
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError("");
+        
         try {
-            const response = await axios.post("/api/auth/signin", form);
-            const { isAdmin } = response.data; // Get isAdmin from the response
+            const response = await fetch("/api/auth/signin", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form)
+            });
+            
+            const data = await response.json();
 
-            if (isAdmin) {
-                router.push("/admin-dashboard");
+            if (response.ok) {
+                if (data.isAdmin) {
+                    router.push("/admin-dashboard");
+                } else {
+                    router.push("/dashboard");
+                }
             } else {
-                router.push("/dashboard");
+                setError(data.message || "Invalid credentials");
+                setLoading(false);
             }
         } catch (err) {
-            setError(err.response?.data?.message || "Sign in failed");
+            setError("Something went wrong. Please try again.");
+            setLoading(false);
         }
     };
 
     return (
-        <div className="flex justify-center items-center h-screen">
-            <Card className="w-[350px]">
-                <CardHeader>
-                    <CardTitle>Sign In</CardTitle>
-                    <CardDescription>Enter your credentials to access your account.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    {error && <p className="text-red-500">{error}</p>}
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="username">Username</Label>
-                            <Input
-                                type="text"
-                                id="username"
-                                name="username"
-                                placeholder="Username"
-                                value={form.username}
-                                onChange={handleChange}
-                                required
-                            />
+        <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 px-4 shadow-sm sm:px-6 lg:px-8">
+            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                <div className="bg-white py-10 px-8 border border-gray-200 shadow-xl rounded-2xl">
+                    <div className="text-center mb-10">
+                        <a href="/" className="inline-block mb-4">
+                            <span className="font-bold text-3xl">
+                                <span className="text-neutral-900">Clin</span>
+                                <span className="text-[#00C9A7]">X</span>
+                            </span>
+                        </a>
+                        <h2 className="text-2xl font-bold text-gray-900">Sign In</h2>
+                        <p className="text-sm text-gray-500 mt-2">Access your hospital portal</p>
+                    </div>
+
+                    {error && (
+                        <div className="mb-6 p-4 bg-red-50 text-red-700 border-l-4 border-red-400 rounded text-sm">
+                            {error}
                         </div>
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="password">Password</Label>
-                            <Input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Password"
-                                value={form.password}
-                                onChange={handleChange}
-                                required
-                            />
+                    )}
+
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                            <div className="relative">
+                                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                                    <User className="h-4 w-4" />
+                                </span>
+                                <input
+                                    type="text"
+                                    name="username"
+                                    required
+                                    value={form.username}
+                                    onChange={handleChange}
+                                    className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm transition-all"
+                                    placeholder="Enter username"
+                                />
+                            </div>
                         </div>
-                        <Button type="submit" className="w-full cursor-pointer">
-                            Sign In
-                        </Button>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <div className="relative">
+                                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                                    <Lock className="h-4 w-4" />
+                                </span>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    required
+                                    value={form.password}
+                                    onChange={handleChange}
+                                    className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm transition-all"
+                                    placeholder="••••••••"
+                                />
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className={`w-full flex justify-center items-center py-3 bg-[#00C9A7] text-white font-bold rounded-lg hover:bg-teal-600 transition-all ${loading ? 'opacity-50' : ''}`}
+                        >
+                            {loading ? "Signing in..." : "Sign In"}
+                            {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
+                        </button>
                     </form>
-                </CardContent>
-            </Card>
+
+                    <p className="mt-8 text-center text-sm text-gray-600">
+                        New to ClinX?{" "}
+                        <a href="/auth/signup" className="text-teal-600 font-semibold hover:underline">
+                            Create Account
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     );
+}
+
+export async function getServerSideProps() {
+    return { props: {} };
 }

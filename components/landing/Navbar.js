@@ -5,13 +5,13 @@ export default function Navbar() {
     <nav className="bg-white p-4 border-b border-neutral-200 relative z-10 min-h-[72px]">
       <div className="container mx-auto flex items-center justify-between flex-wrap">
         <div className="flex items-center flex-shrink-0 mr-6 h-10">
-          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+          <a href="/" className="flex items-center hover:opacity-80 transition-opacity">
             {/* Kept original logo reference if available, otherwise just text */}
             <span className="font-bold text-2xl tracking-tight">
               <span className="text-neutral-900">Clin</span>
               <span className="text-[#00C9A7]">X</span>
             </span>
-          </Link>
+          </a>
         </div>
         <div className="block lg:hidden">
           <button id="navbar-toggle" className="flex items-center px-3 py-2 border rounded text-neutral-500 border-neutral-300 hover:text-primary hover:border-primary">
@@ -23,27 +23,27 @@ export default function Navbar() {
         </div>
         <div id="navbar-menu" className="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:justify-end">
           <div className="text-base lg:flex lg:items-center">
-            <Link href="/" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
+            <a href="/" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
               Home
-            </Link>
-            <Link href="/blogs" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
+            </a>
+            <a href="/blogs" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
               Blogs
-            </Link>
-            <Link href="/pricing" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
+            </a>
+            <a href="/pricing" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
               Pricing
-            </Link>
-            <Link href="/careers" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
+            </a>
+            <a href="/careers" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
               Careers
-            </Link>
-            <Link href="/contact" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
+            </a>
+            <a href="/contact" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
               Contact Us
-            </Link>
-            <Link href="/faq" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
+            </a>
+            <a href="/faq" className="block mt-4 lg:inline-block lg:mt-0 text-neutral-500 hover:text-primary font-semibold mr-8 transition-colors duration-200">
               FAQ
-            </Link>
-            <Link href="/auth/signin" className="block mt-4 lg:inline-block lg:mt-0 px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white text-sm font-semibold rounded-lg hover:shadow-lg transition-all transform hover:scale-105">
+            </a>
+            <a href="/auth/signin" className="block mt-4 lg:inline-block lg:mt-0 px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white text-sm font-semibold rounded-lg hover:shadow-lg transition-all transform hover:scale-105">
               Sign In
-            </Link>
+            </a>
           </div>
         </div>
       </div>
