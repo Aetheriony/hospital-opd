@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>NeftX - Hospital Management Software | OPD, EMR, IPD & Pharmacy</title>
-        <meta name="description" content="Complete hospital management system for clinics and hospitals." />
+        <title>ClinX - Hospital Management Software | OPD, EMR, IPD & Pharmacy</title>
+        <meta name="description" content="ClinX offers advanced Hospital Management Software for SME clinics and hospitals. Manage OPD, EMR, IPD, and Pharmacy with ease." />
       </Head>
       <Navbar />
       <Hero />

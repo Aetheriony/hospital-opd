@@ -7,8 +7,8 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Head>
-        <title>Neftx | Contact Us - Get in Touch with Our Healthcare Solutions Team</title>
-        <meta name="description" content="Contact Neftx for healthcare management solutions. Get support, ask questions, or request a demo for your clinic or hospital." />
+        <title>ClinX | Contact Us - Get in Touch with Our Healthcare Solutions Team</title>
+        <meta name="description" content="Contact ClinX for healthcare management solutions. Get support, ask questions, or request a demo for your clinic or hospital." />
       </Head>
 
       <Navbar />
@@ -40,12 +40,14 @@ const ContactPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-neutral-900 mb-4">Email</h3>
-                <a 
-                  href="mailto:support@neftx.com" 
-                  className="text-primary hover:text-secondary font-bold text-xl block transition-colors"
-                >
-                  support@neftx.com
-                </a>
+                <p className="text-secondary font-medium mt-1">
+                  <a 
+                    href="mailto:support@clinx.com" 
+                    className="hover:text-primary transition-colors"
+                  >
+                    support@clinx.com
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -56,8 +58,8 @@ const ContactPage = () => {
           <div className="container mx-auto px-4">
             <div className="section-title text-center mb-12">
               <h2 className="text-4xl font-bold text-neutral-900 mb-4">Ready to Get Started?</h2>
-              <p className="text-neutral-600 text-xl max-w-2xl mx-auto leading-relaxed">
-                Transform your healthcare practice with NeftX today. Reach out to us for a demo or support.
+              <p className="text-secondary text-lg mt-2">
+                Transform your healthcare practice with ClinX today. Reach out to us for a demo or support.
               </p>
             </div>
 

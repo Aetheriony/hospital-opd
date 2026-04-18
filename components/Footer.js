@@ -2,71 +2,50 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <footer className="bg-white mx-auto border-t border-gray-200 py-8">
+        <footer className="bg-white mx-auto border-t border-gray-200 py-12">
             <div className="max-w-6xl mx-auto px-6 md:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> {/* Changed to 2 columns */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                     {/* Logo & Description */}
-                    <div>
-                        <h2 className="text-2xl font-bold text-gray-900">
-                            {/* Replace with Hospital Name */}
-                            Syam Children And Maternity Hospital
-                        </h2>
-                        <p className="mt-2 text-gray-600">
-                            {/* Replace with Hospital Tagline */}
-                            Your trusted partner for quality healthcare.
+                    <div className="md:col-span-2">
+                        <div className="flex items-center mb-4">
+                            <span className="font-bold text-2xl tracking-tight">
+                                <span className="text-neutral-900">Clin</span>
+                                <span className="text-[#00C9A7]">X</span>
+                            </span>
+                        </div>
+                        <p className="text-gray-600 max-w-sm">
+                            The all-in-one operating system for modern healthcare practices. 
+                            Streamlining OPD, EMR, IPD, and Pharmacy operations.
                         </p>
                     </div>
 
-                    {/* Quick Links & Social Media (Combined) */}
+                    {/* Platform Links */}
                     <div>
-                        <div className="grid grid-cols-2 gap-6"> {/* 2 columns for links */}
-                            {/* Quick Links */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-900">Quick Links</h3>
-                                <ul className="mt-2 space-y-2">
-                                    <li>
-                                        <Link href="/" className="text-gray-600 hover:text-gray-900">
-                                            Home
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/about" className="text-gray-600 hover:text-gray-900">
-                                            About Us
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/contact" className="text-gray-600 hover:text-gray-900">
-                                            Contact
-                                        </Link>
-                                    </li>
-                                    {/* Add more quick links as needed */}
-                                </ul>
-                            </div>
+                        <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Platform</h3>
+                        <ul className="space-y-2">
+                            <li><Link href="/pricing" className="text-gray-600 hover:text-primary transition-colors">Pricing</Link></li>
+                            <li><Link href="/blogs" className="text-gray-600 hover:text-primary transition-colors">Blogs</Link></li>
+                            <li><Link href="/faq" className="text-gray-600 hover:text-primary transition-colors">FAQ</Link></li>
+                        </ul>
+                    </div>
 
-                            {/* Social Media Links */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-900">Follow Us</h3>
-                                <div className="mt-2 flex space-x-4">
-                                    {/* Replace with actual social media links */}
-                                    <Link href="#" className="text-gray-600 hover:text-gray-900">
-                                        Facebook
-                                    </Link>
-                                    <Link href="#" className="text-gray-600 hover:text-gray-900">
-                                        Twitter
-                                    </Link>
-                                    <Link href="#" className="text-gray-600 hover:text-gray-900">
-                                        Instagram
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
+                    {/* Company Links */}
+                    <div>
+                        <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Company</h3>
+                        <ul className="space-y-2">
+                            <li><Link href="/careers" className="text-gray-600 hover:text-primary transition-colors">Careers</Link></li>
+                            <li><Link href="/contact" className="text-gray-600 hover:text-primary transition-colors">Contact Us</Link></li>
+                        </ul>
                     </div>
                 </div>
 
                 {/* Copyright */}
-                <div className="mt-6 text-center border-t border-gray-200 pt-4 text-gray-500 text-sm">
-                    {/* Replace with Hospital Name */}
-                    © {new Date().getFullYear()} Syam Children And Maternity Hospital. All rights reserved.
+                <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+                    <p>© {new Date().getFullYear()} ClinX. All rights reserved.</p>
+                    <div className="flex space-x-6 mt-4 md:mt-0">
+                        <Link href="#" className="hover:text-primary">Privacy Policy</Link>
+                        <Link href="#" className="hover:text-primary">Terms of Service</Link>
+                    </div>
                 </div>
             </div>
         </footer>

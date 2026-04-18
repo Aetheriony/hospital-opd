@@ -6,7 +6,7 @@ export default function BeforeAfterSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-neutral-800 mb-2">
-            Before &amp; After NeftX
+            Before & After ClinX
           </h2>
         </div>
         <div className="space-y-6">

@@ -6,10 +6,10 @@ export default function Pricing() {
   return (
     <>
       <Head>
-        <title>NeftX Pricing | Affordable Healthcare Management Solutions</title>
+        <title>ClinX Pricing | Affordable Healthcare Management Solutions</title>
         <meta
           name="description"
-          content="Choose the perfect plan. Free OPD software forever. Paid addons for Pharmacy, IPD & Website. No hidden commissions."
+          content="Discover affordable pricing plans for ClinX Hospital Management Software. Choose the best plan for your clinic or hospital."
         />
       </Head>
 

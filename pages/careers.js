@@ -8,13 +8,14 @@ const CareersPage = () => {
 
   const jobs = [
     {
-      id: "full-stack",
-      title: "Full Stack Engineer",
-      location: "Hyderabad",
+      id: 1,
+      title: "Full Stack Developer",
+      department: "Engineering",
+      location: "Remote / Hyderabad",
       type: "Full-time",
-      pay: "10,00,000 to 15,00,000",
-      badges: ["Nodejs", "Ruby on rails", "Angular", "Web components"],
-      description: "NeftX is a suite of applications for hospitals, clinics and practitioners. We are getting into exciting features which include one click launch of websites, complete CMS and custom theme selection.",
+      description: "ClinX is a suite of applications for hospitals, clinics and practitioners. We are getting into exciting features which include one click launch of websites, complete CMS and custom theme selection.",
+      requirements: ["React/Next.js", "Node.js", "MongoDB", "Tailwind CSS"],
+      badges: ["Engineering", "MERN Stack"],
       applyUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdM9LtXAGiA7s2FQi9tWRsyPujcR2RuLlFl4weMPfMYpFz0BA/viewform"
     },
     {
@@ -24,7 +25,8 @@ const CareersPage = () => {
       type: "Full-time",
       badges: ["UX", "UXDesigner"],
       description: "This candidate will be responsible for building a clean and effective user experience for our customers. By working cross-functionally, this candidate will understand needs from the product management, engineering, and business stakeholders.",
-      applyEmail: "career@neftx.com"
+      requirements: ["React/Next.js", "Node.js", "MongoDB", "Tailwind CSS"],
+      applyEmail: "career@clinx.com"
     },
     {
       id: "frontend",
@@ -36,20 +38,23 @@ const CareersPage = () => {
       applyUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdM9LtXAGiA7s2FQi9tWRsyPujcR2RuLlFl4weMPfMYpFz0BA/viewform"
     },
     {
-      id: "bdm",
+      id: 2,
       title: "Business Development Manager",
+      department: "Sales",
       location: "Hyderabad",
       type: "Full-time",
-      badges: ["Business development"],
-      description: "NeftX is looking for a dynamic Business Development Manager who is an expert in Software Sales for B2B Industries for a fast-paced company.",
-      applyEmail: "career@neftx.com"
+      description: "ClinX is looking for a dynamic Business Development Manager who is an expert in Software Sales for B2B Industries for a fast-paced company.",
+      requirements: ["3+ years B2B sales", "Healthcare IT experience", "Excellent communication"],
+      badges: ["Sales", "B2B", "Healthcare"],
+      applyEmail: "career@clinx.com"
     }
   ];
 
   return (
     <div className="min-h-screen bg-white">
       <Head>
-        <title>NeftX | Careers - Join Our Mission</title>
+        <title>ClinX | Careers - Join Our Mission</title>
+        <meta name="description" content="Build the future of healthcare with ClinX. Explore open positions and join our mission to transform hospital management." />
       </Head>
 
       <Navbar />
@@ -112,7 +117,7 @@ const CareersPage = () => {
                         )}
 
                         <div className="flex flex-wrap gap-2 pt-2">
-                          {job.badges.map(badge => (
+                          {(job.badges || []).map(badge => (
                             <span key={badge} className="px-3 py-1 bg-info/10 text-info text-xs font-bold rounded-full border border-info/20">
                               {badge}
                             </span>

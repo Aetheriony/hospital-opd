@@ -8,8 +8,8 @@ export default function Navbar() {
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
             {/* Kept original logo reference if available, otherwise just text */}
             <span className="font-bold text-2xl tracking-tight">
-              <span className="text-primary">Neft</span>
-              <span className="text-secondary">X</span>
+              <span className="text-neutral-900">Clin</span>
+              <span className="text-[#00C9A7]">X</span>
             </span>
           </Link>
         </div>

@@ -8,19 +8,19 @@ const FAQPage = () => {
 
   const faqs = [
     {
-      question: "What is the difference between NeftX and any other aggregator?",
-      answer: "At NeftX, we believe in leveraging the power of technology to improve the healthcare industry. Our platform utilizes state-of-the-art tools and techniques to streamline processes and provide a seamless experience for both healthcare professionals and patients."
+      question: "What is the difference between ClinX and any other aggregator?",
+      answer: "At ClinX, we believe in leveraging the power of technology to improve the healthcare industry. Our platform utilizes state-of-the-art tools and techniques to streamline processes and provide a seamless experience for both healthcare professionals and patients."
     },
     {
-      question: "How does NeftX help doctors in branding and digitalization?",
+      question: "How does ClinX help doctors in branding and digitalization?",
       answer: "We provide one-click launch of websites, complete CMS, and custom theme selection to help doctors establish a strong digital presence and brand identity."
     },
     {
-      question: "How much internet bandwidth is required to use NeftX?",
-      answer: "NeftX is designed to be lightweight and efficient, working smoothly even on standard broadband connections typical for clinics and hospitals."
+      question: "How much internet bandwidth is required to use ClinX?",
+      answer: "ClinX is designed to be lightweight and efficient, working smoothly even on standard broadband connections typical for clinics and hospitals."
     },
     {
-      question: "How does NeftX guarantee security?",
+      question: "How does ClinX guarantee security?",
       answer: "We use industry-standard encryption, secure cloud infrastructure, and regular security audits to ensure your data and patient information are always protected."
     }
   ];
@@ -28,7 +28,8 @@ const FAQPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Head>
-        <title>Neftx | Frequently Asked Questions - Healthcare Management Solutions</title>
+        <title>ClinX | Frequently Asked Questions - Healthcare Management Solutions</title>
+        <meta name="description" content="Find answers to common questions about ClinX Hospital Management Software. Learn about our features, security, and more." />
       </Head>
       
       <Navbar />
@@ -82,7 +83,7 @@ const FAQPage = () => {
             <div className="section-title text-center mb-12">
               <h2 className="text-3xl font-bold text-primary">Ready to Get Started?</h2>
               <p className="text-secondary text-lg mt-2">
-                Transform your healthcare practice with NeftX today.
+                Transform your healthcare practice with ClinX today.
               </p>
             </div>
             
