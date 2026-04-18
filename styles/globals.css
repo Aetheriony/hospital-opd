@@ -112,6 +112,14 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --animate-blob: blob 7s infinite;
+}
+
+@keyframes blob {
+  0% { transform: translate(0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0) scale(1); }
 }
 
 @layer base {
@@ -121,4 +129,59 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.logo-cropped {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 0;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #14b8a6, #1e88e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pricing-card {
+  transition: all .3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+}
+
+.hover-lift {
+  transition: all .3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px #0000001a, 0 10px 10px -5px #0000000a;
+}
+
+.free-card {
+  position: relative;
+}
+
+.free-card:before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: #22c55e;
+  border-radius: 1rem;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.free-card:hover:before {
+  opacity: .1;
 }
