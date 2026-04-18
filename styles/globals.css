@@ -167,6 +167,15 @@
   box-shadow: 0 20px 25px -5px #0000001a, 0 10px 10px -5px #0000000a;
 }
 
+.pricing-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-info {
+  background-color: #06b6d2;
+}
+
 .free-card {
   position: relative;
 }
