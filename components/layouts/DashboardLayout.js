@@ -61,14 +61,14 @@ export default function DashboardLayout({ children, title }) {
     ];
 
     return (
-        <div className="flex bg-slate-50 min-h-screen">
+        <div className="flex h-screen bg-slate-50 overflow-hidden">
             {/* Sidebar */}
             <aside 
-                className={`fixed inset-y-0 left-0 bg-[#00C9A7] text-white w-64 shadow-xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col 
-                ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:relative lg:translate-x-0`}
+                className={`fixed inset-y-0 left-0 bg-[#002D27] text-white w-64 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col 
+                ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:static lg:translate-x-0 h-full flex-shrink-0 scrollbar-hide`}
             >
-                <div className="flex items-center justify-between p-4 border-b border-teal-600/50">
-                    <h1 className="text-2xl font-bold tracking-tight">Clin<span className="text-white">X</span> Portal</h1>
+                <div className="flex items-center justify-between p-6 border-b border-white/10 flex-shrink-0">
+                    <h1 className="text-2xl font-bold tracking-tight">Clin<span className="text-[#00C9A7]">X</span> Portal</h1>
                     {isMobile && (
                         <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white hover:text-gray-200">
                             <X className="w-6 h-6" />
@@ -76,67 +76,69 @@ export default function DashboardLayout({ children, title }) {
                     )}
                 </div>
 
-                <nav className="flex-1 overflow-y-auto py-4 space-y-1">
+                <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4 space-y-2 custom-scrollbar">
                     {navItems.map((item) => {
                         const Icon = item.icon;
                         const isActive = router.pathname.includes(item.path);
                         return (
-                            <a 
+                            <Link 
                                 key={item.name} 
                                 href={item.path}
-                                className={`flex items-center px-6 py-3 text-sm font-medium transition-colors
+                                className={`flex items-center px-6 py-3 text-sm font-medium transition-all duration-200 group
                                     ${isActive 
-                                        ? "bg-white/20 border-l-4 border-white text-white" 
+                                        ? "bg-white/20 border-l-4 border-white text-white shadow-lg" 
                                         : "text-teal-50 hover:bg-white/10 hover:text-white"
                                     }`}
                             >
-                                <Icon className="w-5 h-5 mr-3" />
+                                <Icon className={`w-5 h-5 mr-3 transition-transform duration-200 group-hover:scale-110 ${isActive ? "text-white" : ""}`} />
                                 {item.name}
-                            </a>
+                            </Link>
                         );
                     })}
                 </nav>
 
-                <div className="p-4 border-t border-teal-600/50">
+                <div className="p-4 border-t border-white/10 flex-shrink-0">
                     <button 
                         onClick={logout}
-                        className="flex items-center w-full px-4 py-2 text-sm font-medium text-white transition-colors rounded-lg hover:bg-white/10"
+                        className="flex items-center w-full px-4 py-3 text-sm font-semibold text-white transition-all transform hover:bg-white/10 hover:translate-x-1 rounded-xl active:scale-95 group"
                     >
-                        <LogOut className="w-5 h-5 mr-3" />
+                        <LogOut className="w-5 h-5 mr-3 transition-transform group-hover:-rotate-12" />
                         Logout
                     </button>
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <main className="flex-1 flex flex-col min-w-0 transition-all duration-300">
+            {/* Main Content Area */}
+            <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden relative">
                 {/* Navbar */}
-                <header className="bg-white shadow-sm border-b px-4 lg:px-8 py-3 flex items-center justify-between sticky top-0 z-30">
+                <header className="bg-white shadow-sm border-b px-4 lg:px-8 py-3 flex items-center justify-between z-30 flex-shrink-0">
                     <div className="flex items-center">
                         <button 
                             onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="mr-4 lg:hidden text-gray-500 hover:text-gray-700"
+                            className="mr-4 lg:hidden text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors"
                         >
                             <Menu className="w-6 h-6" />
                         </button>
-                        <h2 className="text-xl font-semibold text-gray-800">{title || "Dashboard"}</h2>
+                        <h2 className="text-xl font-bold text-gray-800 tracking-tight">{title || "Dashboard"}</h2>
                     </div>
 
                     <div className="flex items-center space-x-4">
-                        <button className="text-gray-400 hover:text-teal-600 transition-colors">
+                        <button className="p-2 text-gray-400 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-all transform hover:rotate-12">
                             <Bell className="w-5 h-5" />
                         </button>
-                        <div className="h-8 w-8 rounded-full bg-teal-100 flex items-center justify-center text-teal-700 font-bold border border-teal-200">
+                        <button className="h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-700 font-bold border border-teal-200 hover:shadow-md hover:border-teal-400 transition-all transform hover:scale-110 active:scale-90">
                             <User className="w-5 h-5" />
-                        </div>
+                        </button>
                     </div>
                 </header>
 
-                {/* Page Content */}
-                <div className="flex-1 p-4 lg:p-8 overflow-y-auto">
-                    {children}
-                </div>
-            </main>
+                {/* Page content scroll area */}
+                <main className="flex-1 overflow-y-auto bg-slate-50 p-4 lg:p-8 scroll-smooth">
+                    <div className="max-w-7xl mx-auto">
+                        {children}
+                    </div>
+                </main>
+            </div>
 
             {/* Mobile Overlay */}
             {sidebarOpen && isMobile && (

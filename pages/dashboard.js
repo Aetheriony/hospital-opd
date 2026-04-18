@@ -32,40 +32,40 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <button 
                     onClick={() => router.push("/add-doctor")}
-                    className="flex items-center p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-teal-300 transition-all group"
+                    className="flex items-center p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl hover:border-teal-300 transition-all transform hover:-translate-y-1 group"
                 >
-                    <div className="p-3 bg-teal-50 text-teal-600 rounded-lg group-hover:bg-teal-600 group-hover:text-white transition-colors">
-                        <UserPlus className="w-6 h-6" />
+                    <div className="p-4 bg-teal-50 text-teal-600 rounded-xl group-hover:bg-teal-600 group-hover:text-white transition-all duration-300 shadow-inner">
+                        <UserPlus className="w-7 h-7" />
                     </div>
-                    <div className="ml-4 text-left">
-                        <h4 className="text-sm font-semibold text-gray-900">Add Doctor</h4>
-                        <p className="text-xs text-gray-500">Register new medical staff</p>
+                    <div className="ml-5 text-left">
+                        <h4 className="text-base font-bold text-gray-900">Add Doctor</h4>
+                        <p className="text-xs text-gray-500 mt-1">Register new medical staff</p>
                     </div>
                 </button>
 
                 <button 
                     onClick={() => router.push("/add-patient")}
-                    className="flex items-center p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-teal-300 transition-all group"
+                    className="flex items-center p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all transform hover:-translate-y-1 group"
                 >
-                    <div className="p-3 bg-blue-50 text-blue-600 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        <Users className="w-6 h-6" />
+                    <div className="p-4 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-inner">
+                        <Users className="w-7 h-7" />
                     </div>
-                    <div className="ml-4 text-left">
-                        <h4 className="text-sm font-semibold text-gray-900">New Patient</h4>
-                        <p className="text-xs text-gray-500">Register for OPD visit</p>
+                    <div className="ml-5 text-left">
+                        <h4 className="text-base font-bold text-gray-900">New Patient</h4>
+                        <p className="text-xs text-gray-500 mt-1">Register for OPD visit</p>
                     </div>
                 </button>
 
                 <button 
                     onClick={() => router.push("/patient-list")}
-                    className="flex items-center p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-teal-300 transition-all group"
+                    className="flex items-center p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl hover:border-amber-300 transition-all transform hover:-translate-y-1 group"
                 >
-                    <div className="p-3 bg-amber-50 text-amber-600 rounded-lg group-hover:bg-amber-600 group-hover:text-white transition-colors">
-                        <ClipboardList className="w-6 h-6" />
+                    <div className="p-4 bg-amber-50 text-amber-600 rounded-xl group-hover:bg-amber-600 group-hover:text-white transition-all duration-300 shadow-inner">
+                        <ClipboardList className="w-7 h-7" />
                     </div>
-                    <div className="ml-4 text-left">
-                        <h4 className="text-sm font-semibold text-gray-900">Patient Directory</h4>
-                        <p className="text-xs text-gray-500">View all patient records</p>
+                    <div className="ml-5 text-left">
+                        <h4 className="text-base font-bold text-gray-900">Patient Directory</h4>
+                        <p className="text-xs text-gray-500 mt-1">View all patient records</p>
                     </div>
                 </button>
             </div>
