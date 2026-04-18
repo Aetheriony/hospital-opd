@@ -10,18 +10,25 @@ export default async function handler(req, res) {
         return res.status(405).json({ message: "Method not allowed" });
     }
 
-    const { username, password, isAdmin } = req.body;
-    if (!username || !password) {
+    const { username, email, password, isAdmin } = req.body;
+    if (!username || !email || !password) {
         return res.status(400).json({ message: "Missing fields" });
     }
 
     try {
-        const existingUser = await User.findOne({ username });
+        const existingUser = await User.findOne({ 
+            $or: [{ username }, { email }] 
+        });
         if (existingUser) {
-            return res.status(400).json({ message: "User already exists" });
+            return res.status(400).json({ message: "User or email already exists" });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, password: hashedPassword, isAdmin: isAdmin || false });
+        const user = new User({ 
+            username, 
+            email, 
+            password: hashedPassword, 
+            isAdmin: isAdmin || false 
+        });
         await user.save();
         res.status(201).json({ message: "User created successfully" });
     } catch (error) {
