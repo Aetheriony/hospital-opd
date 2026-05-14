@@ -40,7 +40,13 @@ npm install
 Create a `.env.local` file in the root directory and add the following variables:
 
 ```env
-MONGODB_URI=<your_mongodb_uri>
+# Database (use either name — the app reads both)
+MONGO_URI=<your_mongodb_connection_string>
+# or: MONGODB_URI=<your_mongodb_connection_string>
+
+# Required for sign-in (JWT cookie)
+JWT_SECRET=<a_long_random_string>
+
 NEXT_PUBLIC_API_KEY=<your_api_key>
 ```
 
@@ -51,6 +57,27 @@ npm run dev
 ```
 
 6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## MongoDB Atlas & Vercel (fix signup / `ENOTFOUND` / connection errors)
+
+Do this in the [MongoDB Atlas](https://cloud.mongodb.com) UI (it cannot be done from this repo alone).
+
+1. **Use a current connection string**  
+   **Database** → your cluster → **Connect** → **Drivers** → copy the **`mongodb+srv://...`** URI. Replace `<password>` with your database user password.  
+   If tools report **`Non-existent domain`** / **`querySrv ENOTFOUND`** for your hostname, the cluster was removed/renamed or the URI is outdated—copy a fresh URI from Atlas, do not reuse an old host. **Network Access (`0.0.0.0/0`) does not fix a hostname that does not exist in DNS**—you must replace `MONGO_URI` with the host Atlas shows today, then update **Vercel → Environment Variables** and **Redeploy**.
+
+2. **Network Access (allow Vercel / the internet)**  
+   **Network Access** → **Add IP Address** → choose **Allow Access from Anywhere** → enter **`0.0.0.0/0`** → **Confirm**. Wait until the entry is **Active** (about one minute).  
+   (Tighter IP lists are possible but do not work well with Vercel’s changing outbound IPs unless you use Atlas–Vercel integration or Private Endpoint.)
+
+3. **Database user**  
+   **Database Access** → ensure a user exists with a known password and **Read and write to any database** (or appropriate custom role) → password must match what you put in the URI.
+
+4. **Cluster not paused**  
+   On M0/M2/M5, open the cluster and **Resume** if Atlas shows it paused.
+
+5. **Vercel**  
+   Vercel project → **Settings** → **Environment Variables** → set **`MONGO_URI`** or **`MONGODB_URI`** for **Production** (and **Preview** if you use preview URLs) → **Redeploy** the latest deployment.
 
 
 ## Contributing

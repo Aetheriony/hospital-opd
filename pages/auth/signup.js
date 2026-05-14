@@ -31,16 +31,27 @@ export default function SignUp() {
                 })
             });
             
-            const data = await response.json();
+            const text = await response.text();
+            let data = {};
+            try {
+                data = text ? JSON.parse(text) : {};
+            } catch {
+                data = {};
+            }
 
             if (response.ok) {
                 router.push("/auth/signin");
             } else {
-                setError(data.message || "Registration failed");
+                setError(
+                    data.message ||
+                        (response.status >= 500
+                            ? "Server error. Check that MONGO_URI (or MONGODB_URI) is set on Vercel."
+                            : "Registration failed")
+                );
                 setLoading(false);
             }
         } catch (err) {
-            setError("Something went wrong. Please try again.");
+            setError("Network error. Check your connection and try again.");
             setLoading(false);
         }
     };

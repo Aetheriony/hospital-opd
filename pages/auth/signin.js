@@ -23,7 +23,13 @@ export default function SignIn() {
                 body: JSON.stringify(form)
             });
             
-            const data = await response.json();
+            const text = await response.text();
+            let data = {};
+            try {
+                data = text ? JSON.parse(text) : {};
+            } catch {
+                data = {};
+            }
 
             if (response.ok) {
                 if (data.isAdmin) {
@@ -32,11 +38,16 @@ export default function SignIn() {
                     router.push("/dashboard");
                 }
             } else {
-                setError(data.message || "Invalid credentials");
+                setError(
+                    data.message ||
+                        (response.status >= 500
+                            ? "Server error. Check database and JWT_SECRET on Vercel."
+                            : "Invalid credentials")
+                );
                 setLoading(false);
             }
         } catch (err) {
-            setError("Something went wrong. Please try again.");
+            setError("Network error. Check your connection and try again.");
             setLoading(false);
         }
     };

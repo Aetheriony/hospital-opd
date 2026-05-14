@@ -7,8 +7,6 @@ import { serialize } from "cookie"; // Use named import
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export default async function handler(req, res) {
-    await connectDB();
-
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Method not allowed" });
     }
@@ -19,6 +17,8 @@ export default async function handler(req, res) {
     }
 
     try {
+        await connectDB();
+
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(400).json({ message: "Invalid credentials" });
@@ -26,6 +26,13 @@ export default async function handler(req, res) {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        if (!JWT_SECRET) {
+            return res.status(500).json({
+                message:
+                    "Server misconfiguration: JWT_SECRET is not set. Add it in Vercel Environment Variables.",
+            });
         }
 
         const token = jwt.sign(
@@ -45,8 +52,27 @@ export default async function handler(req, res) {
             })
         );
 
-        res.status(200).json({ message: "Sign in successful", isAdmin: user.isAdmin });
+        return res.status(200).json({ message: "Sign in successful", isAdmin: user.isAdmin });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("[api/auth/signin]", error);
+        const msg = error?.message || "Sign in failed";
+        const isConfig = /Missing MONGO_URI|MONGODB_URI|environment variable/i.test(msg);
+        if (isConfig) {
+            return res.status(500).json({
+                message:
+                    "Server misconfiguration: database URL is not set. Add MONGO_URI or MONGODB_URI in Vercel Environment Variables.",
+            });
+        }
+        if (/querySrv|ENOTFOUND|getaddrinfo|ECONNREFUSED|ETIMEDOUT/i.test(msg)) {
+            const dnsLikely = /ENOTFOUND|querySrv|NXDOMAIN|Non-existent domain/i.test(
+                String(error?.cause?.message || msg)
+            );
+            return res.status(503).json({
+                message: dnsLikely
+                    ? "Database hostname does not resolve (DNS error). Replace MONGO_URI with the current mongodb+srv string from Atlas → Database → Connect → Drivers, update Vercel env, redeploy. IP allowlist 0.0.0.0/0 cannot fix a wrong or deleted cluster hostname."
+                    : "Cannot reach the database (network/timeout). Check Atlas Network Access (0.0.0.0/0), cluster status, and MONGO_URI.",
+            });
+        }
+        return res.status(500).json({ message: msg });
     }
 }
